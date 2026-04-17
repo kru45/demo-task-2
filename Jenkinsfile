@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         // This line securely links Jenkins to Python
-        API_KEY = credentials('my-internal-api-key')
+        API_KEY = credentials('SUPER_SECRET_123')
     }
 
     stages {
