@@ -1,12 +1,13 @@
 import os
 import sys
 
-# We look for a variable named 'API_KEY'
-token = os.getenv('my-internal-api-key')
+# Jenkins will "inject" the secret into this variable
+token = os.getenv('API_KEY') 
 
+# Make sure this string matches what you typed in Jenkins Credentials
 if token == "SUPER_SECRET_123":
     print("SUCCESS: Authenticated with Internal API.")
-    print("DATA: {'status': 'active', 'server': 'us-east-1'}")
 else:
-    print("ERROR: Unauthorized! Token is missing or invalid.")
-    sys.exit(1) # This tells Jenkins the build failed
+    # If we are here, it means 'token' is either None or the wrong string
+    print(f"ERROR: Unauthorized! Received: {token}") 
+    sys.exit(1)
